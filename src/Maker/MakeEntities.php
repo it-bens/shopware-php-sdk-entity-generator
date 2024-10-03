@@ -12,7 +12,6 @@ use Symfony\Bundle\MakerBundle\Maker\AbstractMaker;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Vin\ShopwareSdkEntityGenerator\Entity\ClassProperty\TypeGeneratorInterface;
 use Vin\ShopwareSdkEntityGenerator\Entity\CollectionClassInformation;
 use Vin\ShopwareSdkEntityGenerator\Entity\DefinitionClassInformation;

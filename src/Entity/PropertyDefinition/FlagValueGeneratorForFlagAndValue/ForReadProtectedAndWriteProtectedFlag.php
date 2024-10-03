@@ -18,7 +18,7 @@ final class ForReadProtectedAndWriteProtectedFlag implements FlagValueGeneratorF
             return null;
         }
 
-        $values = array_map(fn($item) => '\'' . $item . '\'', array_merge(...$value));
+        $values = array_map(fn ($item) => '\'' . $item . '\'', array_merge(...$value));
 
         return sprintf('[[%s]]', implode(', ', $values));
     }
