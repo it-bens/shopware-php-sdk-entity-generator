@@ -16,6 +16,9 @@ final class EntityClassInformation
 
     private const CLASS_NAME_SUFFIX = 'Entity';
 
+    /**
+     * @var string[]|null
+     */
     private static ?array $classPropertiesOfBaseClass = null;
 
     /**
@@ -49,6 +52,9 @@ final class EntityClassInformation
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getPropertiesWithoutBaseClassProperties(): array
     {
         $classPropertiesOfBaseClass = $this->getClassPropertiesOfBaseClass();
@@ -94,6 +100,9 @@ final class EntityClassInformation
         );
     }
 
+    /**
+     * @return string[]
+     */
     private function getClassPropertiesOfBaseClass(): array
     {
         if (is_array(self::$classPropertiesOfBaseClass)) {

@@ -28,6 +28,9 @@ final class DefinitionClassInformation
      */
     private array $usedClasses = [];
 
+    /**
+     * @var array{name: string, type: string, flags: string, properties: string}[]
+     */
     private array $properties;
 
     public function __construct(
@@ -46,7 +49,7 @@ final class DefinitionClassInformation
 
     public function addProperty(Property $schemaProperty, FlagGeneratorInterface $flagGenerator, PropertiesGeneratorInterface $propertiesGenerator): void
     {
-        $this->properties[$schemaProperty->name] = [
+        $property = [
             'name' => '\'' . $schemaProperty->name . '\'',
             'type' => '\'' . $schemaProperty->type . '\'',
         ];
@@ -56,9 +59,9 @@ final class DefinitionClassInformation
         foreach ($schemaProperty->flags as $flag) {
             $flatConstructionStrings[] = $flagGenerator->generateFlagConstructionString($flag->flag, $flag->value);
         }
-        $this->properties[$schemaProperty->name]['flags'] = sprintf('new FlagCollection([%s])', implode(', ', $flatConstructionStrings));
+        $property['flags'] = sprintf('new FlagCollection([%s])', implode(', ', $flatConstructionStrings));
 
-        $this->properties[$schemaProperty->name]['properties'] = $propertiesGenerator->generatePropertiesArrayString(
+        $property['properties'] = $propertiesGenerator->generatePropertiesArrayString(
             $schemaProperty->entity,
             $schemaProperty->referenceField,
             $schemaProperty->localField,
@@ -66,6 +69,8 @@ final class DefinitionClassInformation
             $schemaProperty->properties,
             self::PROPERTY_INDENTATION_WHITESPACE_COUNT
         );
+
+        $this->properties[$schemaProperty->name] = $property;
     }
 
     public function generateClass(Generator $generator, string $templatePath): void
