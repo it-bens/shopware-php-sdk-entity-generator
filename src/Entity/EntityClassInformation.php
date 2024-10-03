@@ -10,11 +10,11 @@ use Vin\ShopwareSdk\Data\Entity\Entity;
 
 final class EntityClassInformation
 {
-    private const TYPES_THAT_REQUIRE_NO_USE_STATEMENT = ['bool', 'float', 'int', 'array', 'string'];
+    private const array TYPES_THAT_REQUIRE_NO_USE_STATEMENT = ['bool', 'float', 'int', 'array', 'string'];
 
-    private const CLASS_NAMESPACE_PREFIX = 'Data\\Entity\\';
+    private const string CLASS_NAMESPACE_PREFIX = 'Data\\Entity\\';
 
-    private const CLASS_NAME_SUFFIX = 'Entity';
+    private const string CLASS_NAME_SUFFIX = 'Entity';
 
     /**
      * @var string[]|null

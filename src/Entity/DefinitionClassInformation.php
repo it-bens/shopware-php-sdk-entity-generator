@@ -17,11 +17,11 @@ use Vin\ShopwareSdk\Data\Schema\Schema;
 
 final class DefinitionClassInformation
 {
-    private const CLASS_NAMESPACE_PREFIX = 'Data\\Entity\\';
+    private const string CLASS_NAMESPACE_PREFIX = 'Data\\Entity\\';
 
-    private const CLASS_NAME_SUFFIX = 'Definition';
+    private const string CLASS_NAME_SUFFIX = 'Definition';
 
-    private const PROPERTY_INDENTATION_WHITESPACE_COUNT = 16;
+    private const int PROPERTY_INDENTATION_WHITESPACE_COUNT = 16;
 
     /**
      * @var string[]

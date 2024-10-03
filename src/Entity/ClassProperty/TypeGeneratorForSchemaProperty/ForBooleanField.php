@@ -7,8 +7,9 @@ namespace Vin\ShopwareSdkEntityGenerator\Entity\ClassProperty\TypeGeneratorForSc
 use Vin\ShopwareSdkEntityGenerator\Entity\ClassProperty\TypeGeneratorForSchemaProperty;
 use Vin\ShopwareSdk\Data\Schema\Property;
 
-final class ForBooleanField implements TypeGeneratorForSchemaProperty
+final readonly class ForBooleanField implements TypeGeneratorForSchemaProperty
 {
+    #[\Override]
     public function generateClassPropertyType(Property $schemaProperty): ?string
     {
         if ($schemaProperty->type !== 'boolean' && $schemaProperty->type !== 'bool') {

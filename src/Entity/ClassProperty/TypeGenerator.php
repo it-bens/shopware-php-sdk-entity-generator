@@ -7,17 +7,18 @@ namespace Vin\ShopwareSdkEntityGenerator\Entity\ClassProperty;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Vin\ShopwareSdk\Data\Schema\Property;
 
-final class TypeGenerator implements TypeGeneratorInterface
+final readonly class TypeGenerator implements TypeGeneratorInterface
 {
     /**
      * @param iterable<TypeGeneratorForSchemaProperty> $classPropertyTypeGenerators
      */
     public function __construct(
         #[AutowireIterator(TypeGeneratorForSchemaProperty::DI_SERVICE_TAG)]
-        private readonly iterable $classPropertyTypeGenerators
+        private iterable $classPropertyTypeGenerators
     ) {
     }
 
+    #[\Override]
     public function generateClassPropertyType(Property $schemaProperty): string
     {
         foreach ($this->classPropertyTypeGenerators as $classPropertyTypeGenerator) {

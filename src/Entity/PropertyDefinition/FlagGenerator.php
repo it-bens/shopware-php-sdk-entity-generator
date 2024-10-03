@@ -6,17 +6,18 @@ namespace Vin\ShopwareSdkEntityGenerator\Entity\PropertyDefinition;
 
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
-final class FlagGenerator implements FlagGeneratorInterface
+final readonly class FlagGenerator implements FlagGeneratorInterface
 {
     /**
      * @param iterable<FlagValueGeneratorForFlagAndValue> $flagValueGenerators
      */
     public function __construct(
         #[AutowireIterator(FlagValueGeneratorForFlagAndValue::DI_SERVICE_TAG)]
-        private readonly iterable $flagValueGenerators
+        private iterable $flagValueGenerators
     ) {
     }
 
+    #[\Override]
     public function generateFlagConstructionString(string $flag, mixed $value): string
     {
         foreach ($this->flagValueGenerators as $flagValueGenerator) {

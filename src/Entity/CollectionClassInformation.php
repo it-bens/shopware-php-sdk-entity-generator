@@ -10,9 +10,9 @@ use Vin\ShopwareSdk\Data\Entity\EntityCollection;
 
 final class CollectionClassInformation
 {
-    private const CLASS_NAMESPACE_PREFIX = 'Data\\Entity\\';
+    private const string CLASS_NAMESPACE_PREFIX = 'Data\\Entity\\';
 
-    private const CLASS_NAME_SUFFIX = 'Collection';
+    private const string CLASS_NAME_SUFFIX = 'Collection';
 
     /**
      * @var string[]

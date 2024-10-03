@@ -7,8 +7,9 @@ namespace Vin\ShopwareSdkEntityGenerator\Entity\ClassProperty\TypeGeneratorForSc
 use Vin\ShopwareSdkEntityGenerator\Entity\ClassProperty\TypeGeneratorForSchemaProperty;
 use Vin\ShopwareSdk\Data\Schema\Property;
 
-final class ForRemoteAddressField implements TypeGeneratorForSchemaProperty
+final readonly class ForRemoteAddressField implements TypeGeneratorForSchemaProperty
 {
+    #[\Override]
     public function generateClassPropertyType(Property $schemaProperty): ?string
     {
         if ($schemaProperty->type !== 'Shopware\Core\Framework\DataAbstractionLayer\Field\RemoteAddressField') {

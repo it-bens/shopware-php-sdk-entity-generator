@@ -16,9 +16,9 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Dotenv\Command\DebugCommand;
 
-final class RemoveCommandsCompilerPass implements CompilerPassInterface
+final readonly class RemoveCommandsCompilerPass implements CompilerPassInterface
 {
-    private const COMMAND_CLASS_WHITELIST = [
+    private const array COMMAND_CLASS_WHITELIST = [
         AboutCommand::class,
         CacheClearCommand::class,
         CachePoolClearCommand::class,
@@ -30,10 +30,11 @@ final class RemoveCommandsCompilerPass implements CompilerPassInterface
         MakerCommand::class,
     ];
 
-    private const COMMAND_WHITELIST = [
+    private const array COMMAND_WHITELIST = [
         'make:shopware-sdk:entities',
     ];
 
+    #[\Override]
     public function process(ContainerBuilder $container): void
     {
         $commands = $container->findTaggedServiceIds('console.command');

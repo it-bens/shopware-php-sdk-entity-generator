@@ -7,8 +7,9 @@ namespace Vin\ShopwareSdkEntityGenerator\Entity\ClassProperty\TypeGeneratorForSc
 use Vin\ShopwareSdkEntityGenerator\Entity\ClassProperty\TypeGeneratorForSchemaProperty;
 use Vin\ShopwareSdk\Data\Schema\Property;
 
-final class ForIntegerField implements TypeGeneratorForSchemaProperty
+final readonly class ForIntegerField implements TypeGeneratorForSchemaProperty
 {
+    #[\Override]
     public function generateClassPropertyType(Property $schemaProperty): ?string
     {
         if ($schemaProperty->type !== 'int') {

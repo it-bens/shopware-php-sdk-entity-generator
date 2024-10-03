@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Vin\ShopwareSdkEntityGenerator\Entity\PropertyDefinition;
 
-final class PropertiesGenerator implements PropertiesGeneratorInterface
+final readonly class PropertiesGenerator implements PropertiesGeneratorInterface
 {
+    #[\Override]
     public function generatePropertiesArrayString(?string $entity, ?string $referenceField, ?string $localField, ?string $relation, ?array $properties, int $arrayValueIndentationWhitespaceCount): string
     {
         $propertiesArrayString = '[]';

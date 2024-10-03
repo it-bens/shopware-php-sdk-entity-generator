@@ -9,14 +9,15 @@ use Vin\ShopwareSdkEntityGenerator\Entity\ClassProperty\TypeGeneratorForSchemaPr
 use Vin\ShopwareSdk\Data\Schema\Property;
 use function Symfony\Component\String\u;
 
-final class ForToManyAssociation implements TypeGeneratorForSchemaProperty
+final readonly class ForToManyAssociation implements TypeGeneratorForSchemaProperty
 {
     public function __construct(
         #[Autowire(env: 'SDK_DATA_NAMESPACE')]
-        private readonly string $dataNamespace
+        private string $dataNamespace
     ) {
     }
 
+    #[\Override]
     public function generateClassPropertyType(Property $schemaProperty): ?string
     {
         if ($schemaProperty->isToManyAssociation() === false) {

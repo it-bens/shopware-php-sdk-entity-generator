@@ -6,8 +6,9 @@ namespace Vin\ShopwareSdkEntityGenerator\Entity\PropertyDefinition\FlagValueGene
 
 use Vin\ShopwareSdkEntityGenerator\Entity\PropertyDefinition\FlagValueGeneratorForFlagAndValue;
 
-final class ForOtherValues implements FlagValueGeneratorForFlagAndValue
+final readonly class ForOtherValues implements FlagValueGeneratorForFlagAndValue
 {
+    #[\Override]
     public function generateFlagValueForConstructionString(string $flag, mixed $value): ?string
     {
         if (is_string($value) === true || is_array($value) === true) {

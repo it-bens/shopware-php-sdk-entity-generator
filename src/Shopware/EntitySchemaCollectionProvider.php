@@ -5,26 +5,27 @@ declare(strict_types=1);
 namespace Vin\ShopwareSdkEntityGenerator\Shopware;
 
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\Filesystem\Path;
+use Symfony\Component\Filesystem\Filesystem;
 use Vin\ShopwareSdk\Data\Schema\SchemaCollection;
 use Vin\ShopwareSdk\Service\InfoService;
 
-final class EntitySchemaCollectionProvider implements EntitySchemaCollectionProviderInterface
+final readonly class EntitySchemaCollectionProvider implements EntitySchemaCollectionProviderInterface
 {
-    private readonly InfoService $infoService;
+    private Filesystem $filesystem;
+
+    private InfoService $infoService;
 
     public function __construct(
-        #[Autowire('%kernel.project_dir%')]
-        private readonly string $projectDirectory,
         #[Autowire(env: 'SHOPWARE_ENTITY_SCHEMA_FILE_PATH')]
-        private readonly string $entitySchemaFilePath
+        private string $entitySchemaFilePath
     ) {
+        $this->filesystem = new Filesystem();
         $this->infoService = new InfoService();
     }
 
     public function getSchemaCollection(): SchemaCollection
     {
-        $entitySchemaFileContent = file_get_contents(Path::makeAbsolute($this->entitySchemaFilePath, $this->projectDirectory));
+        $entitySchemaFileContent = $this->filesystem->readFile('../' . $this->entitySchemaFilePath);
         /** @phpstan-ignore-next-line */
         $entitySchema = json_decode($entitySchemaFileContent, true);
 
