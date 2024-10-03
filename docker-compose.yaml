@@ -1,5 +1,42 @@
 services:
-  shopware:
-    build:
-      context: .
-      dockerfile: docker/shopware/Dockerfile
+  # 6.5.5.0, 6.5.5.1 and 6.5.5.2 have identical entity schema
+  shopware-6.5.5.0:
+    image: ghcr.io/it-bens/it-bens/shopware-remote-api-test-runner:6.5.5.0_de-DE_EUR
+    volumes:
+      - ./data:/tmp/data
+
+  # 6.5.6.0 and 6.5.6.1 have identical entity schema
+  shopware-6.5.6.0:
+    image: ghcr.io/it-bens/it-bens/shopware-remote-api-test-runner:6.5.6.0_de-DE_EUR
+    volumes:
+      - ./data:/tmp/data
+
+  # 6.5.7.0, 6.5.7.1, 6.5.7.2, 6.5.7.3 and 6.5.7.4 have identical entity schema
+  shopware-6.5.7.1:
+    image: ghcr.io/it-bens/it-bens/shopware-remote-api-test-runner:6.5.7.1_de-DE_EUR
+    volumes:
+      - ./data:/tmp/data
+
+  # 6.5.8.0, 6.5.8.1 and 6.5.8.2 have identical entity schema
+  shopware-6.5.8.0:
+    image: ghcr.io/it-bens/it-bens/shopware-remote-api-test-runner:6.5.8.0_de-DE_EUR
+    volumes:
+      - ./data:/tmp/data
+
+  # 6.5.8.3, 6.5.8.4, 6.5.8.5, 6.5.8.6 and 6.5.8.7 have identical entity schema
+  shopware-6.5.8.3:
+    image: ghcr.io/it-bens/it-bens/shopware-remote-api-test-runner:6.5.8.3_de-DE_EUR
+    volumes:
+      - ./data:/tmp/data
+
+  # 6.5.8.8, 6.5.8.9, 6.5.8.10 and 6.5.8.11 have identical entity schema
+  shopware-6.5.8.8:
+    image: ghcr.io/it-bens/it-bens/shopware-remote-api-test-runner:6.5.8.8_de-DE_EUR
+    volumes:
+      - ./data:/tmp/data
+
+  # 6.5.8.12 and 6.5.8.13 have identical entity schema
+  shopware-6.5.8.12:
+    image: ghcr.io/it-bens/it-bens/shopware-remote-api-test-runner:6.5.8.12_de-DE_EUR
+    volumes:
+      - ./data:/tmp/data
