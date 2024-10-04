@@ -10,7 +10,6 @@ use Symfony\Bundle\MakerBundle\Generator;
 use Symfony\Bundle\MakerBundle\InputConfiguration;
 use Symfony\Bundle\MakerBundle\Maker\AbstractMaker;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Finder\Finder;
@@ -32,6 +31,7 @@ final class MakeEntities extends AbstractMaker
 {
     use ConfigureShopwareVersionArgumentTrait;
     use ConfigureEntityNameOptionTrait;
+    use ConfigureEntityNameToSkipOptionTrait;
 
     private readonly Finder $finder;
 
@@ -64,8 +64,7 @@ final class MakeEntities extends AbstractMaker
     {
         $this->configureShopwareVersionArgument($this->projectDirectory, $this->finder, $command);
         $this->configureEntityNameOption($command);
-
-        //$command->addArgument('entity-name', InputArgument::OPTIONAL, 'Choose an entity by its name. If no entity is chosen, the classes for all entities in the schema will be generated.');
+        $this->configureEntityNameToSkipOption($command);
     }
 
     #[\Override]
@@ -83,11 +82,17 @@ final class MakeEntities extends AbstractMaker
         /** @var string[] $entitiesToCreate */
         $entitiesToCreate = $input->getOption('entity-name');
 
+        /** @var string[] $entitiesToSkip */
+        $entitiesToSkip = $input->getOption('entity-name-to-skip');
+
         $entityMap = new EntityMap();
 
         /** @var Schema $entitySchema */
         foreach ($entitySchemaCollection->getElements() as $entitySchema) {
             if (count($entitiesToCreate) > 0 && in_array($entitySchema->entity, $entitiesToCreate, true) === false) {
+                continue;
+            }
+            if (in_array($entitySchema->entity, $entitiesToSkip, true)) {
                 continue;
             }
 
