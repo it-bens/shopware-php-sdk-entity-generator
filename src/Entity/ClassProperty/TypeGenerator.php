@@ -22,10 +22,7 @@ final readonly class TypeGenerator implements TypeGeneratorInterface
     public function generateClassPropertyType(Property $schemaProperty, string $shopwareVersion): string
     {
         foreach ($this->classPropertyTypeGenerators as $classPropertyTypeGenerator) {
-            $classPropertyType = $classPropertyTypeGenerator->generateClassPropertyType(
-                $schemaProperty,
-                $shopwareVersion
-            );
+            $classPropertyType = $classPropertyTypeGenerator->generateClassPropertyType($schemaProperty, $shopwareVersion);
             if ($classPropertyType !== null) {
                 return $classPropertyType;
             }

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Vin\ShopwareSdkEntityGenerator\Entity\ClassProperty\TypeGeneratorForSchemaProperty;
 
+use Vin\ShopwareSdk\Data\Schema\Property;
 use Vin\ShopwareSdk\Service\Struct\NotificationCollection;
 use Vin\ShopwareSdkEntityGenerator\Entity\ClassProperty\TypeGeneratorForSchemaProperty;
-use Vin\ShopwareSdk\Data\Schema\Property;
 
 final readonly class ForToManyNotificationAssociation implements TypeGeneratorForSchemaProperty
 {

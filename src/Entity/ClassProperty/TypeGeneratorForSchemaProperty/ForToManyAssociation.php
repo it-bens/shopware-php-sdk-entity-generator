@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Vin\ShopwareSdkEntityGenerator\Entity\ClassProperty\TypeGeneratorForSchemaProperty;
 
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Vin\ShopwareSdk\Data\Schema\Property;
 use Vin\ShopwareSdkEntityGenerator\Entity\ClassName\NamespaceGeneratorInterface;
 use Vin\ShopwareSdkEntityGenerator\Entity\ClassProperty\TypeGeneratorForSchemaProperty;
-use Vin\ShopwareSdk\Data\Schema\Property;
 use function Symfony\Component\String\u;
 
 final readonly class ForToManyAssociation implements TypeGeneratorForSchemaProperty

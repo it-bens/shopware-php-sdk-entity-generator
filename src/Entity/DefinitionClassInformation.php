@@ -7,15 +7,15 @@ namespace Vin\ShopwareSdkEntityGenerator\Entity;
 use Symfony\Bundle\MakerBundle\Generator;
 use Symfony\Bundle\MakerBundle\Util\ClassNameDetails;
 use Symfony\Bundle\MakerBundle\Util\UseStatementGenerator;
-use Vin\ShopwareSdkEntityGenerator\Entity\ClassName\NamespaceGeneratorInterface;
-use Vin\ShopwareSdkEntityGenerator\Entity\PropertyDefinition\FlagGeneratorInterface;
-use Vin\ShopwareSdkEntityGenerator\Entity\PropertyDefinition\PropertiesGeneratorInterface;
 use Vin\ShopwareSdk\Data\Entity\EntityDefinition;
 use Vin\ShopwareSdk\Data\Schema\Flag;
 use Vin\ShopwareSdk\Data\Schema\FlagCollection;
 use Vin\ShopwareSdk\Data\Schema\Property;
 use Vin\ShopwareSdk\Data\Schema\PropertyCollection;
 use Vin\ShopwareSdk\Data\Schema\Schema;
+use Vin\ShopwareSdkEntityGenerator\Entity\ClassName\NamespaceGeneratorInterface;
+use Vin\ShopwareSdkEntityGenerator\Entity\PropertyDefinition\FlagGeneratorInterface;
+use Vin\ShopwareSdkEntityGenerator\Entity\PropertyDefinition\PropertiesGeneratorInterface;
 
 final class DefinitionClassInformation
 {
@@ -48,8 +48,11 @@ final class DefinitionClassInformation
         $this->usedClasses[] = Flag::class;
     }
 
-    public function addProperty(Property $schemaProperty, FlagGeneratorInterface $flagGenerator, PropertiesGeneratorInterface $propertiesGenerator): void
-    {
+    public function addProperty(
+        Property $schemaProperty,
+        FlagGeneratorInterface $flagGenerator,
+        PropertiesGeneratorInterface $propertiesGenerator
+    ): void {
         $property = [
             'name' => '\'' . $schemaProperty->name . '\'',
             'type' => '\'' . $schemaProperty->type . '\'',

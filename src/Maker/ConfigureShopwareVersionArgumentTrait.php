@@ -22,12 +22,15 @@ trait ConfigureShopwareVersionArgumentTrait
         foreach ($entitySchemaFileFinder as $file) {
             $shopwareVersions[] = str_replace('entity-schema_', '', $file->getBasename('.json'));
         }
-        $shopwareVersionsWithQuotes = array_map(fn (string $version) => "\"$version\"", $shopwareVersions);
+        $shopwareVersionsWithQuotes = array_map(fn (string $version) => "\"{$version}\"", $shopwareVersions);
 
         $command->addArgument(
             'shopware-version',
             InputArgument::REQUIRED,
-            sprintf('Choose the Shopware version for which the classes should be generated. Available options are %s.', implode(', ', $shopwareVersionsWithQuotes)),
+            sprintf(
+                'Choose the Shopware version for which the classes should be generated. Available options are %s.',
+                implode(', ', $shopwareVersionsWithQuotes)
+            ),
             suggestedValues: $shopwareVersions
         );
     }

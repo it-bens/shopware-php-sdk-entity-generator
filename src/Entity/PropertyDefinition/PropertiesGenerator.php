@@ -7,8 +7,14 @@ namespace Vin\ShopwareSdkEntityGenerator\Entity\PropertyDefinition;
 final readonly class PropertiesGenerator implements PropertiesGeneratorInterface
 {
     #[\Override]
-    public function generatePropertiesArrayString(?string $entity, ?string $referenceField, ?string $localField, ?string $relation, ?array $properties, int $arrayValueIndentationWhitespaceCount): string
-    {
+    public function generatePropertiesArrayString(
+        ?string $entity,
+        ?string $referenceField,
+        ?string $localField,
+        ?string $relation,
+        ?array $properties,
+        int $arrayValueIndentationWhitespaceCount
+    ): string {
         $propertiesArrayString = '[]';
         if ($entity !== null || $referenceField !== null || $localField !== null || $relation !== null || $properties !== null) {
             $propertiesArrayString = '[' . PHP_EOL;

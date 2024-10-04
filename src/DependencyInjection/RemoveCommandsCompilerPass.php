@@ -30,9 +30,7 @@ final readonly class RemoveCommandsCompilerPass implements CompilerPassInterface
         MakerCommand::class,
     ];
 
-    private const array COMMAND_WHITELIST = [
-        'make:shopware-sdk:entities',
-    ];
+    private const array COMMAND_WHITELIST = ['make:shopware-sdk:entities'];
 
     #[\Override]
     public function process(ContainerBuilder $container): void

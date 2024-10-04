@@ -14,18 +14,18 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Finder\Finder;
+use Vin\ShopwareSdk\Data\Schema\Property;
+use Vin\ShopwareSdk\Data\Schema\Schema;
 use Vin\ShopwareSdkEntityGenerator\Entity\ClassName\NamespaceGeneratorInterface;
 use Vin\ShopwareSdkEntityGenerator\Entity\ClassProperty\TypeGeneratorInterface;
 use Vin\ShopwareSdkEntityGenerator\Entity\CollectionClassInformation;
 use Vin\ShopwareSdkEntityGenerator\Entity\DefinitionClassInformation;
 use Vin\ShopwareSdkEntityGenerator\Entity\EntityClassInformation;
 use Vin\ShopwareSdkEntityGenerator\Entity\EntityMap;
+use Vin\ShopwareSdkEntityGenerator\Entity\EntityMap\PathGeneratorInterface as EntityMapPathGeneratorInterface;
 use Vin\ShopwareSdkEntityGenerator\Entity\PropertyDefinition\FlagGeneratorInterface;
-use Vin\ShopwareSdk\Data\Schema\Property;
-use Vin\ShopwareSdk\Data\Schema\Schema;
 use Vin\ShopwareSdkEntityGenerator\Entity\PropertyDefinition\PropertiesGeneratorInterface;
 use Vin\ShopwareSdkEntityGenerator\Shopware\EntitySchemaCollectionProviderInterface;
-use Vin\ShopwareSdkEntityGenerator\Entity\EntityMap\PathGeneratorInterface as EntityMapPathGeneratorInterface;
 use function Symfony\Component\String\u;
 
 final class MakeEntities extends AbstractMaker
