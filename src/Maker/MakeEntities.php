@@ -140,10 +140,12 @@ final class MakeEntities extends AbstractMaker
             );
         }
 
-        /** @var string $entityMapping */
-        $entityMapping = json_encode($entityMap->generateEntityMapping($this->namespaceGenerator, $generator), JSON_PRETTY_PRINT);
-        $entityMappingPath = $this->entityMapPathGenerator->generatePath($shopwareVersion);
-        $generator->dumpFile($entityMappingPath, $entityMapping);
+        if (count($entitiesToCreate) === 0 && count($entitiesToSkip) === 0) {
+            /** @var string $entityMapping */
+            $entityMapping = json_encode($entityMap->generateEntityMapping($this->namespaceGenerator, $generator), JSON_PRETTY_PRINT);
+            $entityMappingPath = $this->entityMapPathGenerator->generatePath($shopwareVersion);
+            $generator->dumpFile($entityMappingPath, $entityMapping);
+        }
 
         $generator->writeChanges();
         $this->writeSuccessMessage($io);
