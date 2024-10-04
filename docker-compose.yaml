@@ -35,8 +35,38 @@ services:
     volumes:
       - ./data:/tmp/data
 
-  # 6.5.8.12 and 6.5.8.13 have identical entity schema
+  # 6.5.8.12, 6.5.8.13 and 6.5.8.14 have identical entity schema
   shopware-6.5.8.12:
     image: ghcr.io/it-bens/it-bens/shopware-remote-api-test-runner:6.5.8.12_de-DE_EUR
+    volumes:
+      - ./data:/tmp/data
+
+  # 6.6.0.0, 6.6.0.1, 6.6.0.2, 6.6.0.3, 6.6.1.0, 6.6.1.1, 6.6.1.2 and 6.6.2.0 have identical entity schema
+  shopware-6.6.0.0:
+    image: ghcr.io/it-bens/it-bens/shopware-remote-api-test-runner:6.6.0.0_de-DE_EUR
+    volumes:
+      - ./data:/tmp/data
+
+  # 6.6.3.0 and 6.6.3.1 have identical entity schema
+  shopware-6.6.3.0:
+    image: ghcr.io/it-bens/it-bens/shopware-remote-api-test-runner:6.6.3.0_de-DE_EUR
+    volumes:
+      - ./data:/tmp/data
+
+  # 6.6.4.0 and 6.6.4.1 have identical entity schema
+  shopware-6.6.4.0:
+    image: ghcr.io/it-bens/it-bens/shopware-remote-api-test-runner:6.6.4.0_de-DE_EUR
+    volumes:
+      - ./data:/tmp/data
+
+  # 6.6.5.0 and 6.6.5.1 have identical entity schema
+  shopware-6.6.5.0:
+    image: ghcr.io/it-bens/it-bens/shopware-remote-api-test-runner:6.6.5.0_de-DE_EUR
+    volumes:
+      - ./data:/tmp/data
+
+  # 6.6.6.0 and 6.6.6.1 have identical entity schema
+  shopware-6.6.6.0:
+    image: ghcr.io/it-bens/it-bens/shopware-remote-api-test-runner:6.6.6.0_de-DE_EUR
     volumes:
       - ./data:/tmp/data
