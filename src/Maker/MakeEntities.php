@@ -19,11 +19,13 @@ use Vin\ShopwareSdkEntityGenerator\Entity\ClassProperty\TypeGeneratorInterface;
 use Vin\ShopwareSdkEntityGenerator\Entity\CollectionClassInformation;
 use Vin\ShopwareSdkEntityGenerator\Entity\DefinitionClassInformation;
 use Vin\ShopwareSdkEntityGenerator\Entity\EntityClassInformation;
+use Vin\ShopwareSdkEntityGenerator\Entity\EntityMap;
 use Vin\ShopwareSdkEntityGenerator\Entity\PropertyDefinition\FlagGeneratorInterface;
 use Vin\ShopwareSdk\Data\Schema\Property;
 use Vin\ShopwareSdk\Data\Schema\Schema;
 use Vin\ShopwareSdkEntityGenerator\Entity\PropertyDefinition\PropertiesGeneratorInterface;
 use Vin\ShopwareSdkEntityGenerator\Shopware\EntitySchemaCollectionProviderInterface;
+use Vin\ShopwareSdkEntityGenerator\Entity\EntityMap\PathGeneratorInterface as EntityMapPathGeneratorInterface;
 use function Symfony\Component\String\u;
 
 final class MakeEntities extends AbstractMaker
@@ -39,7 +41,8 @@ final class MakeEntities extends AbstractMaker
         private readonly TypeGeneratorInterface $classPropertyTypeGenerator,
         private readonly FlagGeneratorInterface $flagGenerator,
         private readonly PropertiesGeneratorInterface $propertiesGenerator,
-        private readonly NamespaceGeneratorInterface $namespaceGenerator
+        private readonly NamespaceGeneratorInterface $namespaceGenerator,
+        private readonly EntityMapPathGeneratorInterface $entityMapPathGenerator
     ) {
         $this->finder = new Finder();
     }
@@ -74,6 +77,8 @@ final class MakeEntities extends AbstractMaker
         $shopwareVersion = $input->getArgument('shopware-version');
         $entitySchemaCollection = $this->entitySchemaCollectionProvider->getSchemaCollection($shopwareVersion);
 
+        $entityMap = new EntityMap();
+
         /** @var Schema $entitySchema */
         foreach ($entitySchemaCollection->getElements() as $entitySchema) {
             $entityName = u($entitySchema->entity)
@@ -93,6 +98,8 @@ final class MakeEntities extends AbstractMaker
                 $entityClassInformation,
                 $collectionClassInformation
             );
+
+            $entityMap->addDefinition($entitySchema->entity, $definitionClassInformation);
 
             /** @var Property $property */
             foreach ($entitySchema->properties as $property) {
@@ -117,6 +124,10 @@ final class MakeEntities extends AbstractMaker
                 $this->projectDirectory . '/templates/Definition.tpl.php'
             );
         }
+
+        $entityMapping = json_encode($entityMap->generateEntityMapping($this->namespaceGenerator, $generator), JSON_PRETTY_PRINT);
+        $entityMappingPath = $this->entityMapPathGenerator->generatePath($shopwareVersion);
+        $generator->dumpFile($entityMappingPath, $entityMapping);
 
         $generator->writeChanges();
         $this->writeSuccessMessage($io);

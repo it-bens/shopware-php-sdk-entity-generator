@@ -25,6 +25,7 @@
     ],
     "require": {
         "php": "^8.3",
+        "composer-runtime-api": "*",
         "it-bens/shopware-sdk": "*",
         "symfony/console": "^7.1",
         "symfony/dotenv": "^7.1",
@@ -61,10 +62,10 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
-        "style-check": "php vendor/bin/ecs check --config=ecs.php src",
-        "style-fix": "php vendor/bin/ecs check --config=ecs.php --fix src",
-        "code-check": "php vendor/bin/rector process --config=rector.php --dry-run src",
-        "code-upgrade": "php vendor/bin/rector process --config=rector.php src",
+        "style-check": "php vendor/bin/ecs check --config=ecs.php --clear-cache src",
+        "style-fix": "php vendor/bin/ecs check --config=ecs.php --fix --clear-cache src",
+        "code-check": "php vendor/bin/rector process --config=rector.php --dry-run --clear-cache src",
+        "code-upgrade": "php vendor/bin/rector process --config=rector.php --clear-cache src",
         "static-analysis": "php vendor/bin/phpstan analyze --configuration=phpstan.neon --memory-limit=-1 src"
     }
 }
