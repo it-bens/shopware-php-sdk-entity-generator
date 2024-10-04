@@ -1,4 +1,4 @@
 maker:
-  root_namespace: 'Vin\ShopwareSdk'
+  root_namespace: '%env(string:SDK_NAMESPACE)%'
   generate_final_classes: true
   generate_final_entities: false
