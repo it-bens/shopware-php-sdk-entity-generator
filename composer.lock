@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d32d13e3ea31be9403763968963ee0a7",
+    "content-hash": "550823f7a664e947828348cb1468fe82",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -428,7 +428,7 @@
             "dist": {
                 "type": "path",
                 "url": "../shopware-php-sdk",
-                "reference": "a899d5b5e459cc8c94bae8a94e6b1e8cd3cece46"
+                "reference": "b4fea24d5f0458ed026cc65861c6d3d9bcd61298"
             },
             "require": {
                 "ext-json": "*",
