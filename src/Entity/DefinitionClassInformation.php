@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Vin\ShopwareSdkEntityGenerator\Entity;
 
 use Symfony\Bundle\MakerBundle\Generator;
+use Symfony\Bundle\MakerBundle\Util\ClassNameDetails;
 use Symfony\Bundle\MakerBundle\Util\UseStatementGenerator;
+use Vin\ShopwareSdkEntityGenerator\Entity\ClassName\NamespaceGeneratorInterface;
 use Vin\ShopwareSdkEntityGenerator\Entity\PropertyDefinition\FlagGeneratorInterface;
 use Vin\ShopwareSdkEntityGenerator\Entity\PropertyDefinition\PropertiesGeneratorInterface;
 use Vin\ShopwareSdk\Data\Entity\EntityDefinition;
@@ -17,8 +19,6 @@ use Vin\ShopwareSdk\Data\Schema\Schema;
 
 final class DefinitionClassInformation
 {
-    private const string CLASS_NAMESPACE_PREFIX = 'Data\\Entity\\';
-
     private const string CLASS_NAME_SUFFIX = 'Definition';
 
     private const int PROPERTY_INDENTATION_WHITESPACE_COUNT = 16;
@@ -35,6 +35,7 @@ final class DefinitionClassInformation
 
     public function __construct(
         private readonly string $entityName,
+        private readonly string $shopwareVersion,
         private readonly string $apiAlias,
         private readonly EntityClassInformation $entityClassInformation,
         private readonly CollectionClassInformation $collectionClassInformation,
@@ -73,22 +74,26 @@ final class DefinitionClassInformation
         $this->properties[$schemaProperty->name] = $property;
     }
 
-    public function generateClass(Generator $generator, string $templatePath): void
+    public function generateClassNameDetails(NamespaceGeneratorInterface $namespaceGenerator, Generator $generator): ClassNameDetails
     {
-        $classDetails = $generator->createClassNameDetails(
-            $this->entityName,
-            self::CLASS_NAMESPACE_PREFIX . $this->entityName . '\\',
-            self::CLASS_NAME_SUFFIX
-        );
+        $namespace = $namespaceGenerator->generateClassNamespace($this->entityName, $this->shopwareVersion);
 
+        return $generator->createClassNameDetails($this->entityName, $namespace, self::CLASS_NAME_SUFFIX);
+    }
+
+    public function generateClass(NamespaceGeneratorInterface $namespaceGenerator, Generator $generator, string $templatePath): void
+    {
         $generator->generateClass(
-            $classDetails->getFullName(),
+            $this->generateClassNameDetails($namespaceGenerator, $generator)
+                ->getFullName(),
             $templatePath,
             [
                 'use_statements' => new UseStatementGenerator($this->usedClasses),
                 'api_alias' => $this->apiAlias,
-                'entity_class' => $this->entityClassInformation->generateClassName($generator),
-                'collection_class' => $this->collectionClassInformation->generateClassName($generator),
+                'entity_class' => $this->entityClassInformation->generateClassNameDetails($namespaceGenerator, $generator)
+                    ->getRelativeName(),
+                'collection_class' => $this->collectionClassInformation->generateClassNameDetails($namespaceGenerator, $generator)
+                    ->getRelativeName(),
                 'properties' => $this->properties,
             ]
         );

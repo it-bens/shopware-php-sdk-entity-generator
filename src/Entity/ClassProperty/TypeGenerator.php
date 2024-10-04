@@ -19,15 +19,24 @@ final readonly class TypeGenerator implements TypeGeneratorInterface
     }
 
     #[\Override]
-    public function generateClassPropertyType(Property $schemaProperty): string
+    public function generateClassPropertyType(Property $schemaProperty, string $shopwareVersion): string
     {
         foreach ($this->classPropertyTypeGenerators as $classPropertyTypeGenerator) {
-            $classPropertyType = $classPropertyTypeGenerator->generateClassPropertyType($schemaProperty);
+            $classPropertyType = $classPropertyTypeGenerator->generateClassPropertyType(
+                $schemaProperty,
+                $shopwareVersion
+            );
             if ($classPropertyType !== null) {
                 return $classPropertyType;
             }
         }
 
-        throw new \RuntimeException(sprintf('No class property type generator found for schema property %s of type %s', $schemaProperty->name, $schemaProperty->type));
+        throw new \RuntimeException(
+            sprintf(
+                'No class property type generator found for schema property %s of type %s',
+                $schemaProperty->name,
+                $schemaProperty->type
+            )
+        );
     }
 }
