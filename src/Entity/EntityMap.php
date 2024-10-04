@@ -27,7 +27,9 @@ final class EntityMap
     {
         $mapping = [];
         foreach ($this->definitions as $apiAlias => $definitionClassInformation) {
-            $mapping[$apiAlias] = $definitionClassInformation->generateClassNameDetails($namespaceGenerator, $generator)->getFullName();
+            /** @var class-string<EntityDefinition> $fullClassName */
+            $fullClassName = $definitionClassInformation->generateClassNameDetails($namespaceGenerator, $generator)->getFullName();
+            $mapping[$apiAlias] = $fullClassName;
         }
 
         return $mapping;

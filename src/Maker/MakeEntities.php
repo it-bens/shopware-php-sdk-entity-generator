@@ -74,6 +74,7 @@ final class MakeEntities extends AbstractMaker
     #[\Override]
     public function generate(InputInterface $input, ConsoleStyle $io, Generator $generator): void
     {
+        /** @var string $shopwareVersion */
         $shopwareVersion = $input->getArgument('shopware-version');
         $entitySchemaCollection = $this->entitySchemaCollectionProvider->getSchemaCollection($shopwareVersion);
 
@@ -125,6 +126,7 @@ final class MakeEntities extends AbstractMaker
             );
         }
 
+        /** @var string $entityMapping */
         $entityMapping = json_encode($entityMap->generateEntityMapping($this->namespaceGenerator, $generator), JSON_PRETTY_PRINT);
         $entityMappingPath = $this->entityMapPathGenerator->generatePath($shopwareVersion);
         $generator->dumpFile($entityMappingPath, $entityMapping);

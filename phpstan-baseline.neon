@@ -1,0 +1,11 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: src/Entity/PropertyDefinition/FlagValueGeneratorForFlagAndValue/ForOtherValues.php
+
+		-
+			message: "#^Parameter \\#1 \\$schema of method Vin\\\\ShopwareSdk\\\\Service\\\\InfoService\\:\\:parseSchema\\(\\) expects array, mixed given\\.$#"
+			count: 1
+			path: src/Shopware/EntitySchemaCollectionProvider.php
