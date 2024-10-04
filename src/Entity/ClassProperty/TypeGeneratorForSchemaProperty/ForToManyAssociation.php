@@ -23,6 +23,9 @@ final readonly class ForToManyAssociation implements TypeGeneratorForSchemaPrope
         if ($schemaProperty->isToManyAssociation() === false) {
             return null;
         }
+        if ($schemaProperty->entity === 'notification') {
+            return null;
+        }
 
         $entityName = u($schemaProperty->entity)
             ->camel()
