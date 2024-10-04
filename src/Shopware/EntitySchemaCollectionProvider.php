@@ -16,17 +16,20 @@ final readonly class EntitySchemaCollectionProvider implements EntitySchemaColle
     private InfoService $infoService;
 
     public function __construct(
-        #[Autowire(env: 'SHOPWARE_ENTITY_SCHEMA_FILE_PATH')]
-        private string $entitySchemaFilePath
+        #[Autowire('%kernel.project_dir%')]
+        private string $projectDirectory,
+        #[Autowire(env: 'SHOPWARE_ENTITY_SCHEMA_FOLDER_PATH')]
+        private string $entitySchemaFolderPath
     ) {
         $this->filesystem = new Filesystem();
         $this->infoService = new InfoService();
     }
 
-    public function getSchemaCollection(): SchemaCollection
+    #[\Override]
+    public function getSchemaCollection(string $shopwareVersion): SchemaCollection
     {
-        $entitySchemaFileContent = $this->filesystem->readFile('../' . $this->entitySchemaFilePath);
-        /** @phpstan-ignore-next-line */
+        $entitySchemaFilePath = $this->projectDirectory . '/' . $this->entitySchemaFolderPath . 'entity-schema_' . $shopwareVersion . '.json';
+        $entitySchemaFileContent = $this->filesystem->readFile($entitySchemaFilePath);
         $entitySchema = json_decode($entitySchemaFileContent, true);
 
         return $this->infoService->parseSchema($entitySchema);

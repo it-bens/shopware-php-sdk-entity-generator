@@ -12,5 +12,5 @@ interface TypeGeneratorForSchemaProperty
 {
     public const DI_SERVICE_TAG = 'vin.shopware_sdk_entity_generator.entity.class_property.type_generator_for_schema_property';
 
-    public function generateClassPropertyType(Property $schemaProperty): ?string;
+    public function generateClassPropertyType(Property $schemaProperty, string $shopwareVersion): ?string;
 }

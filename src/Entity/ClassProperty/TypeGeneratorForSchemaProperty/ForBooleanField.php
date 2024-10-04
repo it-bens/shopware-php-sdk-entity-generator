@@ -10,7 +10,7 @@ use Vin\ShopwareSdk\Data\Schema\Property;
 final readonly class ForBooleanField implements TypeGeneratorForSchemaProperty
 {
     #[\Override]
-    public function generateClassPropertyType(Property $schemaProperty): ?string
+    public function generateClassPropertyType(Property $schemaProperty, string $shopwareVersion): ?string
     {
         if ($schemaProperty->type !== 'boolean' && $schemaProperty->type !== 'bool') {
             return null;

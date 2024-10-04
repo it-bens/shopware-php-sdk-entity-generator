@@ -8,5 +8,5 @@ use Vin\ShopwareSdk\Data\Schema\Property;
 
 interface TypeGeneratorInterface
 {
-    public function generateClassPropertyType(Property $schemaProperty): string;
+    public function generateClassPropertyType(Property $schemaProperty, string $shopwareVersion): string;
 }

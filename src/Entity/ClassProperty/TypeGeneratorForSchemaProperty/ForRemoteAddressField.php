@@ -10,7 +10,7 @@ use Vin\ShopwareSdk\Data\Schema\Property;
 final readonly class ForRemoteAddressField implements TypeGeneratorForSchemaProperty
 {
     #[\Override]
-    public function generateClassPropertyType(Property $schemaProperty): ?string
+    public function generateClassPropertyType(Property $schemaProperty, string $shopwareVersion): ?string
     {
         if ($schemaProperty->type !== 'Shopware\Core\Framework\DataAbstractionLayer\Field\RemoteAddressField') {
             return null;

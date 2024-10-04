@@ -8,5 +8,5 @@ use Vin\ShopwareSdk\Data\Schema\SchemaCollection;
 
 interface EntitySchemaCollectionProviderInterface
 {
-    public function getSchemaCollection(): SchemaCollection;
+    public function getSchemaCollection(string $shopwareVersion): SchemaCollection;
 }
