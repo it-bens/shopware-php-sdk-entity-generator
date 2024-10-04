@@ -31,6 +31,7 @@ use function Symfony\Component\String\u;
 final class MakeEntities extends AbstractMaker
 {
     use ConfigureShopwareVersionArgumentTrait;
+    use ConfigureEntityNameOptionTrait;
 
     private readonly Finder $finder;
 
@@ -62,6 +63,7 @@ final class MakeEntities extends AbstractMaker
     public function configureCommand(Command $command, InputConfiguration $inputConfig): void
     {
         $this->configureShopwareVersionArgument($this->projectDirectory, $this->finder, $command);
+        $this->configureEntityNameOption($command);
 
         //$command->addArgument('entity-name', InputArgument::OPTIONAL, 'Choose an entity by its name. If no entity is chosen, the classes for all entities in the schema will be generated.');
     }
@@ -78,10 +80,17 @@ final class MakeEntities extends AbstractMaker
         $shopwareVersion = $input->getArgument('shopware-version');
         $entitySchemaCollection = $this->entitySchemaCollectionProvider->getSchemaCollection($shopwareVersion);
 
+        /** @var string[] $entitiesToCreate */
+        $entitiesToCreate = $input->getOption('entity-name');
+
         $entityMap = new EntityMap();
 
         /** @var Schema $entitySchema */
         foreach ($entitySchemaCollection->getElements() as $entitySchema) {
+            if (count($entitiesToCreate) > 0 && in_array($entitySchema->entity, $entitiesToCreate, true) === false) {
+                continue;
+            }
+
             $entityName = u($entitySchema->entity)
                 ->camel()
                 ->title();
