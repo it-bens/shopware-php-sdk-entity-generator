@@ -19,6 +19,6 @@ final readonly class ForArrayValue implements FlagValueGeneratorForFlagAndValue
             return null;
         }
 
-        return sprintf('unserialize(\'%s\')', serialize($value));
+        return sprintf('unserialize(\'%s\')', addslashes(serialize($value)));
     }
 }
