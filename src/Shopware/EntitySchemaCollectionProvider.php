@@ -13,7 +13,7 @@ final readonly class EntitySchemaCollectionProvider implements EntitySchemaColle
 {
     private Filesystem $filesystem;
 
-    private InfoService $infoService;
+    private SchemaParserInterface $schemaParser;
 
     public function __construct(
         #[Autowire('%kernel.project_dir%')]
@@ -22,7 +22,7 @@ final readonly class EntitySchemaCollectionProvider implements EntitySchemaColle
         private string $entitySchemaFolderPath
     ) {
         $this->filesystem = new Filesystem();
-        $this->infoService = new InfoService();
+        $this->schemaParser = new SchemaParser();
     }
 
     #[\Override]
@@ -32,6 +32,6 @@ final readonly class EntitySchemaCollectionProvider implements EntitySchemaColle
         $entitySchemaFileContent = $this->filesystem->readFile($entitySchemaFilePath);
         $entitySchema = json_decode($entitySchemaFileContent, true);
 
-        return $this->infoService->parseSchema($entitySchema);
+        return $this->schemaParser->parseSchema($entitySchema);
     }
 }
