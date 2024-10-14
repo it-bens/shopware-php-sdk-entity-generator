@@ -11,6 +11,7 @@ dump-entity-schema:
 	docker compose exec shopware-6.6.4.0 php bin/console framework:schema --schema-format=entity-schema --env=prod /tmp/data/entity-schema_6.6.4.0.json
 	docker compose exec shopware-6.6.5.0 php bin/console framework:schema --schema-format=entity-schema --env=prod /tmp/data/entity-schema_6.6.5.0.json
 	docker compose exec shopware-6.6.6.0 php bin/console framework:schema --schema-format=entity-schema --env=prod /tmp/data/entity-schema_6.6.6.0.json
+	docker compose exec shopware-6.6.7.0 php bin/console framework:schema --schema-format=entity-schema --env=prod /tmp/data/entity-schema_6.6.7.0.json
 
 create-entity-classes:
 	php bin/console make:shopware-sdk:entities "6.5.5.0"
@@ -25,3 +26,4 @@ create-entity-classes:
 	php bin/console make:shopware-sdk:entities "6.6.4.0"
 	php bin/console make:shopware-sdk:entities "6.6.5.0"
 	php bin/console make:shopware-sdk:entities "6.6.6.0"
+	php bin/console make:shopware-sdk:entities "6.6.7.0"

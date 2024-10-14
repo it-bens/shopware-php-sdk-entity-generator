@@ -70,3 +70,8 @@ services:
     image: ghcr.io/it-bens/it-bens/shopware-remote-api-test-runner:6.6.6.0_de-DE_EUR
     volumes:
       - ./data:/tmp/data
+
+  shopware-6.6.7.0:
+    image: ghcr.io/it-bens/it-bens/shopware-remote-api-test-runner:6.6.7.0_de-DE_EUR
+    volumes:
+      - ./data:/tmp/data
